@@ -21,8 +21,9 @@ export const App = () => {
       if (seachImg === '') return;
       try {
         setLoading(true);
-        const images = await fetchImage();
+        const images = await fetchImage({ seachImg: seachImg, page: page });
         setImages(prevState => [...prevState, ...images]);
+        console.log(images);
       } catch (error) {
         toast.error(error);
       } finally {
@@ -53,7 +54,7 @@ export const App = () => {
     setLoading(true);
   };
 
-  const fetchImage = async () => {
+  const fetchImage = async ({ seachImg, page }) => {
     const imgIndex = seachImg.indexOf('/');
     const nameImg = seachImg.slice(imgIndex + 1);
 
